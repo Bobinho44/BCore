@@ -1,4 +1,4 @@
-package fr.bobinho.bcrate.api.entity.type;
+package fr.bobinho.bcrate.api.entity.base;
 
 import com.mojang.datafixers.util.Pair;
 import fr.bobinho.bcrate.api.entity.BEntity;

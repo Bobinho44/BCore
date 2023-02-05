@@ -83,7 +83,6 @@ public class BEntity<T extends BEntity<T>> {
      * Gets the cast entity
      *
      * @param type the type
-     * @param <E>
      * @return the cast entity
      */
     protected @Nonnull <E extends Entity> E getEntity(@Nonnull Class<E> type) {

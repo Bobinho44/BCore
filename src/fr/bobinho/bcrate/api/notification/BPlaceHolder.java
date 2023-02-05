@@ -27,7 +27,7 @@ public class BPlaceHolder {
         BValidate.notNull(newValue);
 
         this.oldValue = oldValue;
-        this.newValue = BColor.color(newValue);
+        this.newValue = BColor.colour(newValue);
     }
 
     /**

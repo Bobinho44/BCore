@@ -1,14 +1,18 @@
 package fr.bobinho.bcrate.api.menu;
 
+import fr.bobinho.bcrate.api.event.BEvent;
 import fr.bobinho.bcrate.api.validate.BValidate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Bobinho menu library
@@ -99,6 +103,17 @@ public abstract class BMenu implements InventoryHolder {
         getInventory().setItem(slot, item);
     }
 
+    public void addItemEvent(int slot, ClickType clickType, Runnable runnable) {
+        BEvent.registerEvent(InventoryClickEvent.class)
+                .filter(event -> Objects.equals(event.getInventory().getHolder(), this))
+                .filter(event -> event.getSlot() == slot)
+                .filter(event -> event.getClick() == clickType)
+                .consume(event -> {
+                    event.setCancelled(true);
+
+                    runnable.run();
+                });
+    }
     /**
      * {@inheritDoc}
      */

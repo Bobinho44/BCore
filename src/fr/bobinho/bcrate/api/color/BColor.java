@@ -107,28 +107,28 @@ public final class BColor {
      * @param text the text
      * @return the text without color
      */
-    public static @Nonnull String strip(@Nonnull String text) {
+    public static @Nonnull String discolour(@Nonnull String text) {
         return ChatColor.stripColor(text);
     }
 
     /**
-     * Colorizes the text
+     * Colours the text
      *
      * @param text the text
      * @return the colorized text
      */
-    public static @Nonnull String color(@Nonnull String text) {
+    public static @Nonnull String colour(@Nonnull String text) {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
     /**
-     * Cleans the text
+     * Cleans the text color
      *
      * @param text the text
      * @return the cleaned text
      */
     public static @Nonnull String cleanColor(@Nonnull String text) {
-        return new BItemBuilder(Material.STICK).name(color(text)).build().getItemMeta().getDisplayName();
+        return new BItemBuilder(Material.STICK).name(colour(text)).build().getItemMeta().getDisplayName();
     }
 
 }

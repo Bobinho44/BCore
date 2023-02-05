@@ -1,5 +1,8 @@
 package fr.bobinho.bcrate.api.notification;
 
+import fr.bobinho.bcrate.api.color.BColor;
+import fr.bobinho.bcrate.api.setting.BSetting;
+
 import javax.annotation.Nonnull;
 import java.util.List;
 
@@ -8,12 +11,18 @@ import java.util.List;
  */
 public interface BNotification {
 
+    BSetting getSettingFile();
+
+    String getNotificationName();
+
     /**
      * Gets the text of the notification
      *
      * @return the text of the notification
      */
-    String getNotification();
+    default String getNotification() {
+        return BColor.colour(getSettingFile().getString(getNotificationName()));
+    }
 
     /**
      * Gets the text of the notification after modification via placeholders
@@ -21,7 +30,15 @@ public interface BNotification {
      * @param placeholders all placeholders
      * @return the text of the notification after modification via placeholders
      */
-    String getNotification(@Nonnull BPlaceHolder... placeholders);
+    default String getNotification(@Nonnull BPlaceHolder... placeholders) {
+        String notification = getSettingFile().getString(getNotificationName());
+
+        for (BPlaceHolder placeHolder : placeholders) {
+            notification = notification.replaceAll(placeHolder.getOldValue(), placeHolder.getReplacement());
+        }
+
+        return BColor.colour(notification);
+    }
 
     /**
      * Gets the text list of the notification after modification via placeholders
@@ -29,6 +46,18 @@ public interface BNotification {
      * @param placeholders all placeholders
      * @return the text of the notification after modification via placeholders
      */
-    List<String> getNotifications(@Nonnull BPlaceHolder... placeholders);
+    default List<String> getNotifications(@Nonnull BPlaceHolder... placeholders) {
+        List<String> notifications = getSettingFile().getStringList(getNotificationName()).stream().toList();
+
+        return notifications.stream()
+                .map(notification -> {
+                    for (BPlaceHolder placeHolder : placeholders) {
+                        notification = notification.replaceAll(placeHolder.getOldValue(), placeHolder.getReplacement());
+                    }
+
+                    return BColor.colour(notification);
+                })
+                .toList();
+    }
 
 }

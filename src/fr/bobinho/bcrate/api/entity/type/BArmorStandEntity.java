@@ -1,7 +1,7 @@
-package fr.bobinho.bcrate.api.entity.base;
+package fr.bobinho.bcrate.api.entity.type;
 
 import fr.bobinho.bcrate.api.entity.BEntityType;
-import fr.bobinho.bcrate.api.entity.type.BArmoredEntity;
+import fr.bobinho.bcrate.api.entity.base.BArmoredEntity;
 import fr.bobinho.bcrate.api.packet.BPacket;
 import net.minecraft.core.Vector3f;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;

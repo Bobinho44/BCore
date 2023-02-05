@@ -38,7 +38,7 @@ public class BCommand extends BaseCommand {
                 continue;
             }
 
-            //Sends the command informations
+            //Sends the command information
             sender.sendMessage(BColor.GOLD + method.getAnnotation(Syntax.class).value() + BColor.AQUA + " - " +
                     BColor.GREEN + method.getAnnotation(Description.class).value());
         }

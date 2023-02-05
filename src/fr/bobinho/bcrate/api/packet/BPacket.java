@@ -100,7 +100,7 @@ public final class BPacket {
         try {
             //Gets field
             Field field = instance.getClass().getDeclaredField(name);
-            boolean flag = field.isAccessible();
+            boolean flag = field.canAccess(instance);
 
             //Allows accessible
             if (!flag) {
